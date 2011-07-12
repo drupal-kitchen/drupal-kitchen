@@ -1,0 +1,7 @@
+name = Signup confirm e-mail
+description = "Adds a field to the signup form to confirm the user's e-mail address."
+dependencies[] = signup
+package = Signup
+core = 7.x
+
+files[] = signup_confirm_email.inc
