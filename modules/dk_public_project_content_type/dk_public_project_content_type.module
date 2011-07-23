@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Public Project Content Type feature.
+ */
+
+include_once('dk_public_project_content_type.features.inc');
