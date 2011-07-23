@@ -1,0 +1,22 @@
+<?php
+/**
+ * @file
+ * Tests for the signup module
+ */
+
+class SignupTestCase extends DrupalWebTestCase {
+
+  public function setUp() {
+    parent::setUp('signup');
+  }
+
+  public function getInfo() {
+    return array(
+      'name' => 'Signup stub functionality',
+      'description' => 'Stub for testing functionality of the Signup module.',
+      'group' => 'Signup',
+    );
+  }
+
+}
+

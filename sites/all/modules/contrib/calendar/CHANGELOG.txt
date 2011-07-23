@@ -1,0 +1,80 @@
+Calendar Module 7.x
+==================
+
+=================
+Version 7.x-2.x-dev
+=================
+
+======================
+Version 7.x-2.0-alpha1
+======================
+
+- Issue #1137538 Views renamed 'wildcard' to 'exception'.
+- Issue #1135064 by Niremizov and KarenS, Don't try to get ui_name() before handler is initialized to avoid fatal errors when editing settings.
+- Add date fields to the calendar view so we can process them normally.
+- More cleanup of ical, by ankur and KarenS.
+- Issue #1096224 Make sure we don't get notice on views that have no rendered fields.
+- Issue #1087528 by thekevinday and KarenS, clean up ical handling.
+- A little reorganization to get a shared function out of theme.inc.
+- Rework calendar node processing to use ->style_plugin->render_fields() instead of trying to render them individually. Probably still some work to do on this change, but it cleans things up and prevents accidentally tromping on other fields in the view.
+- Moved a variable we still need in the navigation, move it back.
+- Issue #1130966, re-organize the theme processing so it the day and week views work right in the new Views preview pane.
+- Issue #1119752 by cezaryrk, Eliminate Views token handling errors when manually theming calendar items.
+- Views renamed 'wildcard' to 'exception'.
+- Fix references to the 'date_argument' argument, it now might also be the simple argument as well.
+- Fix reference to function that was renamed in Date module.
+- Fix another reference to node type.
+- Get rid of notices from not trying to force ->type into the calendar.
+- Issue #1098916 by arlinsandbulte: Delete master branch
+- #1084366 by developer-x - Set the default value for date_first_day to 1
+- Some calendar settings were getting lost in export/clone.
+- #1043856 Needed to copy changes made to theme.inc to multiday/theme.inc.
+- #582940 by mcpuddin - Nonexistant "First day of week" causes weekday offset in the calendar.
+- Fix header layout.
+- Fix minor styling issues.
+- #998824 - For multiday layout, default to overlapping styles unless otherwise specified
+- #1032774 On multiday layout, the week display had a border missing in the all-day row
+
+======================
+Version 7.x-1.0-dev
+======================
+
+Abandoned the 7.x-1.x branch.
+
+Start a new 7.x-2.x branch that will contain a complete re-work of the Views handling.
+
+The 7.x-2.x branch will totally re-work and simplify the Views filters. These changes may/will 
+break some views and will require that you check views that use the date filter or 
+argument to be sure they are still configured correctly.
+
+There is a new date_filter_handler_simple for an individual date field that simplifies 
+the Views handling by using most of the core Views field handling but adds in the 
+possibility to set a default date using options like 'now', along with a choice of a 
+month/day/year drop-down selector or popup calendar selector.
+
+The date_filter_handler is an extension of the simple handler that allows you to combine 
+multiple dates into a single filter so that you can control all of them with the same 
+filter widget, allowing you to either 'OR' or 'AND' them together.
+
+The arguments will be rewritten in the same way, with a simple argument handler for 
+individual dates and another handler that extends that to control multiple dates with 
+a single argument.
+
+=======================
+Version 7.x-1.0-alpha3
+=======================
+
+Argh! Fixing the field handling broke the handling for system dates. Try again.
+
+=======================
+Version 7.x-1.0-alpha2
+=======================
+
+Views made lots of changes to field handling just before the new release, which broke lots of things here. 
+Adding some work-arounds to get things working again and waiting until the dust settles on how the new core fields will be handled in Views before doing much more with the Views integration. These changes should get things working with latest Views release.
+
+=======================
+Version 7.x-1.0-alpha1
+=======================
+
+Initial release, probably still buggy.
