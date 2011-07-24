@@ -1,0 +1,6 @@
+name = Kitchen
+package = Kitchen
+version = VERSION
+core = 7.x
+stylesheets[all][] = layout.css
+
