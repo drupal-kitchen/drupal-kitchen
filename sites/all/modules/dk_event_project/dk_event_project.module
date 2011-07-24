@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the DK_event_project feature.
+ */
+
+include_once('dk_event_project.features.inc');

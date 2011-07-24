@@ -1,0 +1,220 @@
+/* $Id: layout.css,v 1.3 2009/08/03 03:04:34 webchick Exp $ */
+
+/**
+ * @file
+ * Stark layout method
+ *
+ * To avoid obscuring CSS added to the page by Drupal or a contrib module, the
+ * Stark theme itself has no styling, except just enough CSS to arrange the page
+ * in a traditional "Header, sidebars, content, and footer" layout.
+ *
+ * This layout method works reasonably well, but shouldn't be used on a
+ * production site because it can break. For example, if an over-large image
+ * (one that is wider than 20% of the viewport) is in the left sidebar, the
+ * image will overlap with the #content to the right. The exception to this
+ * is IE6 which will just hide the navigation block completely in these
+ * instances due to a positioning bug.
+ */
+
+body {
+  margin:0;
+  padding:0;
+  background:url('img/kitchen-bg.jpg') repeat center top fixed;
+  background-color:#000;
+  color:#EEE;
+  font-family:Georgia,"Nimbus Roman No9 L",serif;
+}
+
+h1.title {
+  margin:0 0 .5em;
+}
+
+h1, h2 {
+  font-family:'Over the Rainbow';
+}
+
+#content,
+#sidebar-first,
+#sidebar-second {
+  float: left;
+  display: inline;
+  position: relative;
+}
+
+#content {
+  width: 100%;
+}
+body.sidebar-first #content {
+  width: 80%;
+  left: 20%; /* LTR */
+}
+body.sidebar-second #content {
+  width: 80%;
+}
+body.two-sidebars #content {
+  width: 60%;
+  left: 20%;
+}
+
+#sidebar-first {
+  width: 20%;
+  left: -80%; /* LTR */
+}
+
+body.two-sidebars #sidebar-first {
+  left: -60%; /* LTR */
+}
+
+#sidebar-second {
+  float: right; /* LTR */
+  width: 20%;
+}
+
+.section {
+  margin: 10px;
+}
+
+#page-wrapper {
+  width:960px;
+  margin:0 auto;
+}
+
+table {
+  color:#111;
+}
+
+tr {
+  background:#FFF;
+}
+
+a {
+  text-decoration:none;
+  color:#80BEE5;
+}
+
+a.active, li a.active {
+  color:#486aca;
+}
+
+a:hover {
+  text-decoration:underline;
+}
+
+ul.primary li a {
+  background:#F6F6F6;
+  padding:.25em 1em 0;
+}
+
+#page {
+  position:relative;
+}
+
+.breadcrumb {
+  padding:0;
+  text-align:center;
+}
+
+.breadcrumb a {
+  font-size:10px;
+  color:#888;
+}
+
+#navigation {
+  position:absolute;
+  top:0;
+  right:0;
+}
+
+#main-wrapper {
+  margin-top:5em;
+}
+
+#content {
+  background:#000;
+}
+
+#secondary-menu li {
+  background:#111;
+  padding:.5em;
+  margin:0 0 0 .5em;
+  line-height:3em;
+  font-family:'Over the Rainbow';
+}
+
+#sidebar-first .section {
+  margin-top:0;
+  margin-left:0;
+}
+
+#sidebar-first .block, #footer .block {
+  background:#000;
+  padding:1em .5em;
+  margin-bottom:1em;
+}
+
+#footer .section {
+  margin:.5em 0;
+}
+
+#block-block-1 {
+  font-family:'Over the Rainbow';
+}
+
+#sidebar-first .block h2 {
+  margin:0;
+}
+
+#sidebar-first .block ul.menu {
+  margin:0;
+}
+
+#sidebar-first .block ul.menu li {
+  margin:0 0 0 -1em;
+}
+
+#block-views-supporters-block {
+  text-align:center;
+}
+
+#block-views-supporters-block .views-row {
+  margin:1em auto 0;
+}
+
+
+/* User Stories */
+#block-views-user-stories-block .views-row .user-story  {
+  color:#888;
+}
+
+#block-views-user-stories-block .views-row .user-story .field-content {
+  display:inline;
+  font-style:italic;
+  text-decoration:underline;
+  color:#FFF;
+}
+
+#block-views-user-stories-block .views-row .tasks .open-close {
+  margin-left:2em;
+  color:#80BEE5;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:bold;
+  font-style:italic;
+}
+
+
+#block-views-user-stories-block .views-row .tasks .task-list {
+  display:none;
+}
+
+#block-views-user-stories-block .views-row .tasks .task-status {
+  font-style:italic;
+  font-weight:bold;
+  font-size:14px;
+  text-align:right;
+}
+
+
+#block-views-user-stories-block .view-content h3{
+  text-transform:capitalize;
+}

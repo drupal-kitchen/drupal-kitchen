@@ -1,0 +1,21 @@
+name = Signup
+description = "Allow users to sign up for content (especially events)."
+package = Signup
+dependencies[] = views
+core = 7.x
+
+files[] = signup.test
+files[] = views/handlers/signup_handler_argument_signup_user_uid.inc
+files[] = views/handlers/signup_handler_field_signup_edit_link.inc
+files[] = views/handlers/signup_handler_field_signup_node_link.inc
+files[] = views/handlers/signup_handler_field_signup_send_confirmation.inc
+files[] = views/handlers/signup_handler_field_signup_status.inc
+files[] = views/handlers/signup_handler_field_signup_user_attended.inc
+files[] = views/handlers/signup_handler_field_signup_user_email.inc
+files[] = views/handlers/signup_handler_field_signup_user_form_data.inc
+files[] = views/handlers/signup_handler_filter_signup_disabled.inc
+files[] = views/handlers/signup_handler_filter_signup_status.inc
+files[] = views/handlers/signup_handler_filter_signup_user_attended.inc
+files[] = views/handlers/signup_handler_filter_signup_user_authenticated.inc
+files[] = views/plugins/signup_plugin_access_user_signup_list.inc
+files[] = views/plugins/signup_plugin_argument_validate_signup_status.inc
