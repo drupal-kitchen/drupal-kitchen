@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the upcoming events feature.
+ */
+
+include_once('dk_upcoming_events.features.inc');
