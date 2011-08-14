@@ -1,0 +1,102 @@
+<?php
+
+/**
+ * @file
+ * Adds controls to adjust the width and placement of the sidebars and page in
+ * themes created with Zenophile.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function zenophile_sidebars_form_zenophile_create_alter(&$form, $form_state) {
+  if (isset($form['advanced_fset'])) {
+    $form['advanced_fset']['sidebars_fset'] = array(
+      '#title' => t('Adjust sidebar widths and placement'),
+      '#type' => 'fieldset',
+      '#collapsible' => FALSE,
+      '#collapsed' => FALSE,
+      '#weight' => 30,
+      'sidebars_on' => array(
+        '#type' => 'checkbox',
+        '#title' => t('Override sidebar and page widths and placement'),
+        '#description' => t('If checked, a new CSS file named &ldquo;sidebars.css&rdquo; will be added to the new theme which will attempt to adjust the widths and placement of your sidebars and page regions using the values below. The default values assume the STARTERKIT starter theme is being used; this feature may not work properly with other starter themes.'),
+        '#weight' => 0,
+      ),
+      'page' => array(
+        '#title' => t('Page wrapper width (#page)'),
+        '#type' => 'textfield',
+        '#size' => 4,
+        '#field_suffix' => 'px',
+        '#default_value' => '960',
+        '#description' => t('This value is ignored if your theme will have a liquid layout.'),
+        '#weight' => 10,
+      ),
+      'sidebar-left' => array(
+        '#title' => t('First sidebar width (div.region-sidebar-first)'),
+        '#type' => 'textfield',
+        '#size' => 4,
+        '#field_suffix' => 'px',
+        '#default_value' => '200',
+        '#weight' => 20,
+      ),
+      'sidebar-right' => array(
+        '#title' => t('Second sidebar width (div.region-sidebar-second)'),
+        '#type' => 'textfield',
+        '#size' => 4,
+        '#field_suffix' => 'px',
+        '#default_value' => '200',
+        '#weight' => 30,
+      ),
+      'sidebar-pos' => array(
+        '#title' => t('Sidebar positioning'),
+        '#type' => 'radios',
+        '#options' => array(
+          'normal' => t('Sidebars on their respective sides'),
+          'left' => t('Both sidebars on left of main area'),
+          'right' => t('Both sidebars on right of main area'),
+        ),
+        '#default_value' => 'normal',
+        '#weight' => 40,
+      ),
+    );
+  }
+}
+
+/**
+ * Implements hook_zenophile_alter() (a Zenophile hook).
+ */
+function zenophile_sidebars_zenophile_alter(&$files, $info) {
+  if ($info['form_values']['sidebars_on']) {
+    // Which sidebars.css template are we going to copy?
+    $files['css/sidebars.css'] = array(
+      // Dictating a file name like this would normally be hella insecure, but
+      // FAPI will limit the available choices to those that were in the form we
+      // created.
+      'from' => drupal_get_path('module', 'zenophile_sidebars') . "/css/sidebars-{$info['form_values']['sidebar-pos']}-{$info['form_values']['layout']}.css",
+      'type' => 'file',
+      'weight' => 61000,
+    );
+    $page = intval($info['form_values']['page']);
+    $ls = intval($info['form_values']['sidebar-left']);
+    $rs = intval($info['form_values']['sidebar-right']);
+    $ls_content_width = $page - $ls;
+    $rs_content_width = $page - $rs;
+    $both_sidebars_width = $ls + $rs;
+    $both_content_width = $page - $both_sidebars_width;
+    $files['css/sidebars.css']['repl'] = array(
+      '/PAGE/' => $page,
+      '/LSB-SB/' => $ls,
+      '/RSB-SB/' => $rs,
+      '/BOTHSB-SB/' => $both_sidebars_width,
+      '/LSB-CONTENT/' => $ls_content_width,
+      '/RSB-CONTENT/' => $rs_content_width,
+      '/BOTHSB-CONTENT/' => $both_content_width,
+    );
+    // Add sidebars.css to the .info file's list
+    // Note we're using tildes in the regex in the key because a key using
+    // slashes may have been set in zenophile.module when the option to add a
+    // fresh stylesheet is chosen, and we don't want to clobber that.
+    $files[$info['t_name'] . '.info']['repl']['~^; Add conditional stylesheets that are processed by IE\.~m'] = "; Customized sidebar/content widths and positions\n\nstylesheets[all][]        = css/sidebars.css\n\n; Add conditional stylesheets that are processed by IE.";
+  }
+}

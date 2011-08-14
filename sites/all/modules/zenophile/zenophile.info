@@ -1,0 +1,10 @@
+name = Zenophile
+description = Quickly create Zen subthemes.
+package = Development
+core = 7.x
+; Information added by drupal.org packaging script on 2011-05-14
+version = "7.x-1.0"
+core = "7.x"
+project = "zenophile"
+datestamp = "1305344217"
+
