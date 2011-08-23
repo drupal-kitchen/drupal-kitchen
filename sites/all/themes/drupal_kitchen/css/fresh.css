@@ -1,0 +1,80 @@
+/** 
+GLOBAL
+********************************************* **/
+h1#page-title {
+  display: none;
+}
+
+body {
+  background-repeat: no-repeat;
+  background-image: url(../images/background-short.gif);
+  background-image: url(../images/background-tall.gif);
+  background-position: top center;
+}
+
+/** 
+HEADER
+********************************************* **/
+#header {
+  position: relative;
+  height: 145px;
+  margin-bottom: 74px;
+}
+
+#header #logo {
+  margin-top: 1px;
+}
+
+/* Top menu */
+#block-menu-menu-top-menu .content ul {
+  position: absolute;
+  bottom: 0px;
+  left: 300px;
+}
+
+#block-menu-menu-top-menu .content ul,
+#block-menu-menu-top-menu .content ul li {
+  display: block;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  list-style-image: none;
+}
+
+#block-menu-menu-top-menu .content ul li {
+  float: left;
+}
+
+#block-menu-menu-top-menu .content ul li a {
+  font-family: "Coustard";
+  text-decoration: none;
+  font-size: 2em;
+  margin-right: 50px;
+  
+  text-shadow: rgb(75, 75, 75) 2px 2px 3px;
+  color: #FFF;
+}
+
+/** 
+CONTENT AREA
+********************************************* **/
+
+/* white area for the abstracts and other page headers */
+#block-views-abstracts-block {
+  background-color: #FFF;
+  margin: 0;
+  height: 511px;
+}
+
+#block-views-abstracts-block > .content {
+  padding: 50px;
+}
+
+/* page */
+#content .node-page {
+  background-color: rgb(203, 184, 163);
+}
+
+#content .node-page > .content {
+  padding: 10px;
+}

@@ -1,0 +1,139 @@
+<?php
+
+/**
+ * @file
+ * Aid to create light-on-dark Zen-based themes with Zenophile.
+ *
+ * This module is functional, but it's also intended to be a guide for others
+ * who wish to write add-on modules for Zenophile. The comments will reflect
+ * that.
+ *
+ * Besides a solid understanding of Drupal module coding fundamentals, you will
+ * probably need at least a basic understanding of regular expressions to build
+ * a Zenophile add-on module.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Add our controls to Zenophile's form.
+ *
+ * This seems inelegant, but it's the simplest way to add your own controls to
+ * Zenophile's form. Zenophile's unmodified form will have #weight values set
+ * for everything; use them for precise placement of your controls. Also, please
+ * set #weight values for your own elements, for the benefit of other modules.
+ *
+ * You should also add a #validate callback to the form, if your controls need
+ * one. Zenophile Midnight is just adding a checkbox, so it's not necessary in
+ * this case.
+ *
+ * When creating and debugging your own Zenophile add-on, you'll find it helpful
+ * to set the ZENOPHILE_DEBUG constant to TRUE in zenophile.module. When this is
+ * set, Zenophile will not actually create the new subtheme; if you have the
+ * Devel module installed (strongly recommended!), it will instead use the dsm()
+ * function to print out the value of the $files array (see the comments for
+ * hook_zenophile_alter() below for more info on the $files array). It's usually
+ * faster to find glitches by checking out what's in $files instead of
+ * inspecting the files of the created theme (though you should eventually do
+ * that too).
+ */
+function zenophile_midnight_form_zenophile_create_alter(&$form, $form_state) {
+  if (isset($form['advanced_fset'])) {
+    $form['advanced_fset']['midnight'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Include Zen Midnight stylesheet and images'),
+      '#weight' => $form['advanced_fset']['fresh']['#weight'] + 5,
+      '#description' => t('The Zen Midnight stylesheet and images invert or darken the colors in the standard Zen Sub-theme Starter Kit (STARTERKIT) theme so that the theme you create will better serve as the base of a theme with a light-on-dark color scheme (light-colored text on a dark-colored background).'),
+    );
+  }
+}
+
+/**
+ * Implements hook_zenophile_alter() (a Zenophile hook).
+ *
+ * Add the CSS files and add the lines the .info file.
+ *
+ * This is Zenophile's one and only hook. It lets you modify the list of files
+ * that Zenophile will use to build the theme. Note that the order that these
+ * hooks are called is relevant; you should take care not to modify the info
+ * for a file which isn't in the $file array yet, or your data will be
+ * clobbered when another hook adds it. If necessary, use a hook_install() to
+ * modify your module's weight value in {system} (see Zenophile's own
+ * hook_install() for an example).
+ *
+ * @param $files
+ *   An associative array of files which will be copied or created for the new
+ *   theme. Your hook implementation should receive this value by reference and
+ *   modify it. Your implementation shouldn't return anything. $files will be
+ *   an associative array with the key being the name of the file relative to
+ *   the new theme's directory, and the value being an associative array with
+ *   the following keys:
+ *   'from' - The path to the source file, if this file is being copied; a blank
+ *     string, if this should be a new file. Ignored if the 'type' value is
+ *     'dir'.
+ *   'type' - 'file' or 'dir' depending on whether a file or directory should be
+ *     created/copied. Note that directories are *never* copied; if you wish to
+ *     completely copy a directory, you need to add all of its child files and
+ *     directories to $files too. The _zenophile_populate_files() function can
+ *     help with this; check out its definition in zenophile.module and how it
+ *     is used below.
+ *   'repl' - an array of regular expression replacements to run on the text of
+ *     the file, with the key being the pattern and the value being the
+ *     replacement. This is ignored, of course, if 'type' === 'dir'.
+ *   'weight' - A weight value which lets you set the order that the items in
+ *     the $files directory are processed. In actuality, this probably doesn't
+ *     matter, but I added this functionality for some reason, so there must
+ *     have been a good reason at some point in time.
+ * @param $info
+ *   An associative array of info about the theme, with the following keys and
+ *   values;
+ *   't_name' - The system name of the theme.
+ *   't_dir' - The directory where the theme will reside.
+ *   'parent' - The parent theme system name.
+ *   'parent_dir' - The directory where the parent theme resides.
+ *   'zen_dir' - The directory where Zen resides.
+ *   'form_values' - The submitted form values. use this to check the values of
+ *     the form elements you added earlier. See below for an example.
+ */
+function zenophile_midnight_zenophile_alter(&$files, $info) {
+  if ($info['form_values']['midnight']) {
+    $css_dir = $info['form_values']['zen_info']['vers_float'] >= 2 ? 'css/' : '';
+    $weight = 60990;
+    $my_dir = drupal_get_path('module', 'zenophile_midnight');
+    $files[$css_dir . 'zen_midnight.css'] = array(
+      'from' => $my_dir . '/css/zen_midnight.css',
+      'type' => 'file',
+      'repl' => array('~^/* $Id.+$~' => '/* $I' . 'd$ */'),
+      'weight' => $weight += 10,
+    );
+
+    // Just in case the parent theme doesn't have an image directory defined
+    // already
+    if (!isset($files['images'])) {
+      $files['images'] = array(
+        'type' => 'dir',
+        'weight' => $weight += 10,
+      );
+    }
+    // Add my images to $files
+    foreach (_zenophile_populate_files($my_dir, 'images') as $file => $type) {
+      $files[$file] = array(
+        'from' => "{$my_dir}/{$file}",
+        'type' => $type,
+        'repl' => array(),
+        'weight' => $weight += 10,
+      );
+    }
+    // …but we actually want the logo image to go somewhere else
+    $files['logo.png'] = $files['images/logo.png'];
+    unset($files['images/logo.png']);
+/*
+    // …and likewise with the screenshot image
+    $files['screenshot.png'] = $files['images/screenshot.png'];
+    unset($files['images/screenshot.png']);
+*/
+
+    // Add the CSS files to the .info file
+    $files[$info['t_name'] . '.info']['repl']['/print\.css$/m'] = "print.css\n\n; Add Zen Midnight stylesheets for dark-on-light color scheme\n\nstylesheets[all][]        = {$css_dir}zen_midnight.css";
+  }
+}

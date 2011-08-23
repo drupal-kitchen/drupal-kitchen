@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Zenophile's .install file.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Set the weight of the Zenophile module to -10 so that its own
+ * hook_zenophile_alter() implementation fires first with other modules'
+ * implementations having to set their weights higher.
+ */
+function zenophile_install() {
+  $record = array(
+    'name' => 'zenophile',
+    'weight' => -10,
+  );
+  drupal_write_record('system', $record, 'name');
+}

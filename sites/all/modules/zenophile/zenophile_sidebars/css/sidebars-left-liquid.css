@@ -1,0 +1,41 @@
+
+/* Liquid layout; both sidebars on left */
+
+div.region-sidebar-first {
+  width: LSB-SBpx;
+  margin-right: -LSB-SBpx;
+}
+
+div.region-sidebar-second {
+  float: left;
+  width: RSB-SBpx;
+}
+
+body.two-sidebars div.region-sidebar-second {
+  margin-left: LSB-SBpx;
+  margin-right: -BOTHSB-SBpx;
+}
+
+body.sidebar-second div.region-sidebar-second {
+  margin-left: 0px;
+  margin-right: -RSB-SBpx;
+}
+
+div.region-sidebar-second div.section {
+  margin-left: 0px;
+  margin-right: 20px;
+}
+
+body.sidebar-first #content div.section {
+  padding-left: LSB-SBpx;
+}
+
+body.sidebar-second #content div.section {
+  padding-left: RSB-SBpx;
+  padding-right: 0px;
+}
+
+body.two-sidebars #content div.section {
+  padding-left: BOTHSB-SBpx;
+  padding-right: 0px;
+}
