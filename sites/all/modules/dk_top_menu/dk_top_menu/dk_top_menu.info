@@ -1,0 +1,8 @@
+core = "7.x"
+dependencies[] = "features"
+dependencies[] = "menu"
+description = "Top Menu"
+features[menu_custom][] = "menu-top-menu"
+features[menu_links][] = "menu-top-menu:<front>"
+name = "Top Menu"
+package = "Features"
