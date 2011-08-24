@@ -1,0 +1,18 @@
+
+/* Liquid layout; standard sidebar placement */
+
+div.region-sidebar-first {
+  width: LSB-SBpx;
+}
+
+div.region-sidebar-second {
+  width: RSB-SBpx;
+}
+
+body.sidebar-first #content div.section, body.two-sidebars #content div.section {
+  padding-left: LSB-SBpx;
+}
+
+body.sidebar-second #content div.section, body.two-sidebars #content div.section {
+  padding-right: RSB-SBpx;
+}

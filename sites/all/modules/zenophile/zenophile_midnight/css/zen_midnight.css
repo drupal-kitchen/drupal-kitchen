@@ -1,0 +1,273 @@
+/**
+ * Basic site elements
+ */
+
+body {
+	background-color: black;
+	color: white;
+}
+
+/**
+ * Links
+ */
+
+a {
+	color: #99f;
+}
+
+a:visited {
+	color: #ebf;
+}
+
+a:active {
+	color: #f99;
+}
+
+#skip-to-nav a:link, #skip-to-nav a:visited {
+	color: black;
+}
+
+#site-name a:link, #site-name a:visited, #skip-to-nav a:hover {
+	color: white;
+}
+
+/**
+ * Unpublished and preview stuff
+ */
+
+.preview .node {
+	background-color: #222201; /* #ffffea */
+}
+
+.node-unpublished {
+	background-color: #221717; /* #fff4f4 */
+}
+
+.node-unpublished div.unpublished, .comment-unpublished div.unpublished {
+	color: #393939; /* #d8d8d8 */
+}
+
+/**
+ * List elements
+ */
+
+ul li.expanded {
+  list-style-image: url(../images/menu-expanded.png);
+}
+
+ul li.collapsed {
+  list-style-image: url(../images/menu-collapsed.png);
+}
+
+ul li.leaf {
+  list-style-image: url(../images/menu-leaf.png);
+}
+
+ul li a.active {
+	color: white;
+}
+
+/**
+ * Fieldsets
+ */
+
+html.js fieldset.collapsible .fieldset-legend {
+	background-image: url(../images/menu-expanded.png);
+}
+
+html.js fieldset.collapsed .fieldset-legend {
+	background-image: url(../images/menu-collapsed.png);
+}
+
+/**
+ * Tables
+ */
+
+tbody, th, thead th, form th, form thead th, tr.even, tr.odd {
+	border-color: #333;
+}
+
+tr.even, tr.odd {
+	background-color: #111;
+}
+
+tr.drag {
+  background-color: #331; /* #fffff0 */
+}
+tr.drag-previous {
+  background-color: #220;
+}
+td.active {
+  background-color: #222;
+}
+
+tr.selected td {
+  background-color: #330;
+}
+
+table.sticky-header {
+	background: black;
+}
+
+/**
+ * Particular tables
+ */
+
+table.system-status-report th {
+	border-bottom-color: #333;
+}
+
+/**
+ * Block rearrange page
+ */
+
+.block-region {
+	background-color: #990; /* #ff6 originally */
+}
+
+#blocks tr.region-message {
+	color: #666;
+}
+
+/**
+ * Tabs - primary
+ */
+
+ul.primary {
+	background-image: url(../images/tab-bar.png);
+	border-bottom-color: #444; /* #bbb originally */
+}
+
+ul.primary li a, ul.primary li a:hover,
+ul.primary li.active a, ul.primary li.active a:hover {
+	background-image: url(../images/tab-left.png);
+	color: white;
+}
+
+ul.primary li.active a {
+	border-color: #444 #444 #000; /* #bbb #bbb #fff originally */
+}
+
+ul.primary li a .tab, ul.primary li a:hover .tab,
+ul.primary li.active a .tab, ul.primary li.active a:hover .tab {
+	background-image: url(../images/tab-right.png);
+}
+
+ul.primary li a {
+	color: #888; /* #777 originally */
+}
+
+ul.primary li a:hover {
+	/*background-color: #111; *//* #eee originally */
+	border-color: #333 #333 #111; /* #ccc #ccc #eee originally */
+}
+
+/**
+ * Tabs - secondary
+ */
+
+ul.secondary {
+	background-image: url(../images/tab-secondary-bg.png);
+	border-bottom-color: #3F3F3F; /* c0c0c0 originally */
+}
+
+ul.secondary a, ul.secondary a:hover,
+ul.secondary a.active, ul.secondary a.active:hover {
+	background-image: url(../images/tab-secondary.png);
+	border-color: #3F3F3F;
+	color: #888;
+}
+
+ul.secondary a:hover, ul.secondary a.active, ul.secondary a.active:hover {
+	color: white;
+}
+
+/**
+ * Tabs - vertical!
+ */
+
+.vertical-tabs ul.vertical-tabs-list li {
+  background-color: inherit;
+}
+
+.vertical-tabs ul.vertical-tabs-list li.selected {
+  background-color: #111;
+}
+
+.vertical-tabs ul.vertical-tabs-list .selected strong {
+  color: white;
+}
+
+/**
+ * Messages and such
+ */
+
+div.messages, div.status, div.warning, div.error {
+	color: white;
+	background-color: #330; /* ffc */
+}
+
+div.ok, tr.ok, .update tr.ok {
+	background-color: #020; /* #dfd */
+	color: #dfd; /* #020 */
+}
+
+div.error, tr.error, .update tr.error {
+	background-color: #100; /* #fee */
+	color: #f66; /* #900 */
+}
+
+.update tr.error .version-recommended {
+	background-color: #200; /* #fdd */
+}
+
+div.warning, tr.warning, .update tr.warning {
+	background-color: #330; /* #ffc */
+	/*border-color: #630; /* #fc0 */
+	color: white;
+}
+
+.update tr.warning .version-recommended {
+	background-color: #441;
+}
+
+.update tr.unknown {
+  background-color: #222; /* #ddd */
+}
+
+/**
+ * Log entries
+ */
+
+tr.dblog-user .active {
+	background-color: #220; /* #eed - 110 is too close to basic table row color */
+}
+
+tr.dblog-content .active {
+	background-color: #002; /* #cce */
+}
+
+tr.dblog-page-not-found .active, tr.dblog-access-denied .active {
+	background-color: #131; /* #cec */
+}
+
+tr.dblog-error .active {
+	background-color: #350000; /* #eeb9b9 */
+}
+
+/**
+ * Block editing links on hover
+ */
+
+div.block.with-block-editing div.edit {
+	background-color: black;
+	border-color: #111;
+}
+
+/**
+ * Misc
+ */
+
+.progress .bar {
+	background-image: url(../images/progress.gif);
+}
