@@ -8,8 +8,14 @@ h1#page-title {
 body {
   background-repeat: no-repeat;
   background-image: url(../images/background-short.gif);
-  background-image: url(../images/background-tall.gif);
   background-position: top center;
+}
+
+/*
+Change to the tall background on certain pages
+*/
+body.node-type-page {
+  background-image: url(../images/background-tall.gif);
 }
 
 /** 
@@ -68,6 +74,21 @@ CONTENT AREA
 
 #block-views-abstracts-block > .content {
   padding: 50px;
+  
+  font-family: "Kreon";
+  font-size: 4em;
+  color: #666;
+}
+
+#block-views-abstracts-block > .content p {
+  margin: 0;
+  line-height: 110%;
+  color: rgb(83, 73, 65);
+}
+
+#block-views-abstracts-block > .content p span.details {
+  font-weight: bold;
+  color: rgb(214, 116, 64);
 }
 
 /* page */
